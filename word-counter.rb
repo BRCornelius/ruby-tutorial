@@ -2,7 +2,7 @@
 FILE_NAME = "romeo-juliet.txt"
 
 # Variables are snake case
-romeo_juliet = File.read(FILE_NAME)
+# romeo_juliet = File.read(FILE_NAME)
 # puts romeo_juliet
 
 # Command gets requests input from user
@@ -43,9 +43,21 @@ romeo_juliet = File.read(FILE_NAME)
 
 # define a function
 # if you omit the return command, it returns the last value
-def word_from_file(text)
+def word_from_file(text_file)
+    begin
+        text = File.read(text_file)
+    rescue
+        puts "Please create the file"
+        exit
+    end
+    word_hash = {}
     # return text.downcase.gsub(/[^a-z]/, " ").split
-    text.downcase.gsub(/[^a-z]/, " ").split
+    words = text.downcase.gsub(/[^a-z]/, " ").split
+    words.each do |word|
+        word_hash[word] = 0 unless word_hash[word]
+        word_hash[word] += 1
+    end
+    word_hash
 end
 
 ## puts word_from_file(romeo_juliet)
@@ -69,4 +81,20 @@ end
 # symbols are immutable
 # exist as names of things
 # case by case usage
-#
+
+# for loop
+# three dots in range excludes last index
+## for i in 0...array.length
+##    puts array[i]
+## end
+
+# blocks
+# This is a block: {|x| puts(x+1)}
+# This is also a block:
+## do |x|
+##    puts(x+1)
+## end
+# To pass a block to an iteration: array.each {|x| puts(x+1)}
+# Block is run on each item in an array
+
+puts word_from_file(FILE_NAME).sort_by {|word, count| count }
