@@ -98,3 +98,4 @@ end
 # Block is run on each item in an array
 
 puts word_from_file(FILE_NAME).sort_by {|word, count| count }
+puts word_from_file("bad-file.txt")
